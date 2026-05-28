@@ -1,0 +1,54 @@
+{
+  "name": "Weekly Content Digest Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Weekly Digest Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { week: new Date().toISOString().slice(0, 10), published: 3, drafts: 5, nextAction: 'Review pending drafts' } }];"
+      },
+      "id": "digest",
+      "name": "Build Digest Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Weekly Digest Schedule": {
+      "main": [
+        [
+          {
+            "node": "Build Digest Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

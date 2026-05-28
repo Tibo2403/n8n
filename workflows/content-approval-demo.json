@@ -1,0 +1,54 @@
+{
+  "name": "Content Approval Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Daily Review Window",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { title: 'Demo post awaiting approval', channel: 'LinkedIn', status: 'pending_review' } }];"
+      },
+      "id": "prepare",
+      "name": "Prepare Approval Item",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Daily Review Window": {
+      "main": [
+        [
+          {
+            "node": "Prepare Approval Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
