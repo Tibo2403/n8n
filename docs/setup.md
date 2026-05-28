@@ -10,6 +10,14 @@
 n8n import:workflow --input=workflows/auto-social-publisher.json
 ```
 
+## Validate exports
+
+Run the repository validation before committing workflow changes:
+
+```bash
+node scripts/validate-workflows.mjs
+```
+
 ## Backup workflows
 
 ```bash

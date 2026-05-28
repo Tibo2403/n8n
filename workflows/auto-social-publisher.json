@@ -1,0 +1,124 @@
+{
+  "name": "Auto Social Publisher Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "topic",
+              "name": "topic",
+              "value": "AI productivity tip for professionals",
+              "type": "string"
+            },
+            {
+              "id": "platform",
+              "name": "platform",
+              "value": "linkedin",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "prepare-brief",
+      "name": "Prepare Brief",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const topic = $input.first().json.topic;\nreturn [{ json: { ...$input.first().json, post: `Demo post: ${topic}.\\n\\nUse one clear workflow, measure the outcome, and improve the next iteration. #AI #Productivity` } }];"
+      },
+      "id": "compose-post",
+      "name": "Compose Demo Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "demo-output",
+      "name": "Demo Output",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        900,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {
+      "main": [
+        [
+          {
+            "node": "Prepare Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Brief": {
+      "main": [
+        [
+          {
+            "node": "Compose Demo Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose Demo Post": {
+      "main": [
+        [
+          {
+            "node": "Demo Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "demo",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

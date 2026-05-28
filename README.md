@@ -1,21 +1,34 @@
 # n8n Auto Social Publisher
 
-Automation workspace for n8n workflows that prepare and publish social content across channels.
+[![Validate Workflows](https://github.com/Tibo2403/n8n/actions/workflows/validate-workflows.yml/badge.svg)](https://github.com/Tibo2403/n8n/actions/workflows/validate-workflows.yml)
 
-## Structure
+Automation workspace for n8n workflows that prepare, review, and publish social content.
+
+## Contents
 
 ```text
-workflows/        Exported workflow JSON files
-docs/setup.md     Import, backup, and operations notes
-.env.example      Required credentials and runtime variables
+workflows/                         Exported n8n workflow JSON files
+workflows/auto-social-publisher.json Demo workflow export
+docs/setup.md                      Import, backup, and operations notes
+scripts/validate-workflows.mjs      CI validation for workflow exports
+.env.example                       Required credentials and runtime variables
 ```
+
+## Demo Workflow
+
+`workflows/auto-social-publisher.json` is a safe demo export. It runs on a schedule, prepares a topic brief, composes a deterministic demo post, and returns a JSON preview. It does not include production credentials.
 
 ## Getting Started
 
 1. Copy `.env.example` to `.env`.
-2. Fill in the credentials required by the workflows you import.
-3. Export workflows from n8n into `workflows/`.
-4. Document each workflow trigger, destination, and expected output.
+2. Fill in credentials for the integrations you use.
+3. Import the demo workflow:
+
+   ```bash
+   n8n import:workflow --input=workflows/auto-social-publisher.json
+   ```
+
+4. Review nodes and credentials inside n8n before enabling the workflow.
 
 ## Export Workflows
 
@@ -23,10 +36,10 @@ docs/setup.md     Import, backup, and operations notes
 n8n export:workflow --all --output=workflows/
 ```
 
-## Import Workflows
+## Validate Exports
 
 ```bash
-n8n import:workflow --input=workflows/auto-social-publisher.json
+node scripts/validate-workflows.mjs
 ```
 
 ## Maintenance Checklist
