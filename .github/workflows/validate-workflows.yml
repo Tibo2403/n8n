@@ -6,9 +6,17 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-workflows-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate-json:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
