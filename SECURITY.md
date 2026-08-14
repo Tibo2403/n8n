@@ -1,11 +1,21 @@
 # Security Policy
 
-## Supported Versions
+## Supported version
 
-Security fixes are applied to the `main` branch.
+Security fixes target the current default branch. The included workflows are
+demonstrations and must be reviewed before operational use.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-Please report workflow, credential, or automation security issues privately to the repository owner. Include the affected workflow export and reproduction steps.
+Use GitHub's private vulnerability reporting or open a private security
+advisory in this repository. Do not place API keys, webhook secrets, exported
+credentials, personal data, or active endpoint URLs in a public issue.
 
-Do not include real n8n credentials, API keys, OAuth tokens, production webhook URLs, or customer content.
+Include the affected workflow or script, impact, reproduction steps, and a
+minimal redacted export when possible.
+
+## Workflow safety
+
+Inspect every imported node, credential reference, webhook, schedule, and
+external destination before enabling a workflow. Use test accounts and
+least-privilege credentials first.
