@@ -27,3 +27,6 @@ jobs:
 
       - name: Validate workflow exports
         run: node scripts/validate-workflows.mjs
+
+      - name: Run workflow tests
+        run: node --test tests/*.test.mjs
